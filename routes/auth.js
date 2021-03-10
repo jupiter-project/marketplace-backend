@@ -5,14 +5,14 @@ import jwt from 'jsonwebtoken';
 import User from '~/database/models/user';
 import commonConstants from '~/constants/common';
 import messageConstants from '~/constants/message';
-import utils from '~/utils';
+import utility from '~/utils/utility';
 
 exports.register = async (req, res) => {
   try {
     const { email, name, password } = req.body;
 
     let user = await User.findOne({ email: { $regex: new RegExp('^' + email.toLowerCase() + '$', 'i') } });
-    if (!utils.isEmpty(user)) {
+    if (!utility.isEmpty(user)) {
       return res.status(402).json({
         message: messageConstants.AUTH_EMAIL_EXISTED_ERROR
       });
@@ -42,7 +42,7 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     let user = await User.findOne({ email: { $regex: new RegExp('^' + email.toLowerCase() + '$', 'i') } });
-    if (utils.isEmpty(user)) {
+    if (utility.isEmpty(user)) {
       return res.status(404).json({
         message: messageConstants.AUTH_USER_NOT_FOUND
       });

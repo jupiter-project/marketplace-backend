@@ -47,5 +47,5 @@ mongoose.connect(process.env.MONGO_URI,
     console.log('error creating db connection: ' + err);
   })
 
-app.listen(process.env.PORT);
-console.log(`🚀 Server listening on port ` + process.env.PORT);
+app.listen(process.env.SERVER_PORT);
+console.log(`🚀 Server listening on port ` + process.env.SERVER_PORT);
