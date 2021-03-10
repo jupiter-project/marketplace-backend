@@ -2532,6 +2532,6 @@ class Gravity {
   }
 }
 
-const gravity = new Gravity();
-
-export default gravity;
+module.exports = {
+  gravity: new Gravity(),
+};
