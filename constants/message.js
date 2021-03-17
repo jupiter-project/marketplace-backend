@@ -5,7 +5,7 @@ const message = {
   TRANSACTION_ERROR: 'There was an error in saving the transaction record',
   CREATE_JUPITER_ACCOUNT: 'Jupiter account created',
   GET_JUPITER_ACCOUNT: 'Get Jupiter account',
-  CREATE_NFT_TOKEN: 'Jupiter NFT token created'
+  UPLOAD_FILE_CLOUDINARY: 'File is uploaded on Cloudinary.'
 };
 
 export default message;
