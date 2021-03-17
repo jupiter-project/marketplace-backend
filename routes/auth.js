@@ -1,11 +1,11 @@
-import { gravity } from '~/libs/gravity';
 import * as jupiterService from '~/services/jupiter';
 import messageConstants from '~/constants/message';
 import { isEmpty } from '~/utils/utility';
+import generatePassphrase from '~/utils/generatePassphrase';
 
 exports.createPassphrase = (req, res) => {
   try {
-    const passphrase = gravity.generate_passphrase();
+    const passphrase = generatePassphrase();
 
     return res.status(200).json({
       success: true,

@@ -1,5 +1,5 @@
 import AuthAPI from '~/routes/auth';
-import NFTAPI from '~/routes/nft';
+import CloudinaryAPI from '~/routes/cloudinary';
 
 exports.assignRoutes = app => {
 
@@ -9,6 +9,6 @@ exports.assignRoutes = app => {
   app.post('/api/get/jupiter-account', AuthAPI.getJupiterAccount);
 
   // * nft API
-  app.post('/api/nft-token/create', NFTAPI.createNFTtoken);
+  app.post('/api/cloudinary/upload', CloudinaryAPI.uploadFileCloudinary);
 
 }
