@@ -4,15 +4,24 @@ import mongoose from 'mongoose';
 import timestampPlugin from '~/database/models/plugins/timestamp';
 
 const UserSchema = new mongoose.Schema({
+  accountRS: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  account: {
+    type: String,
+    required: true
+  },
   name: {
     type: String,
-    required: true
+    default: null
+  },
+  description: {
+    type: String,
+    default: null
   },
   email: {
-    type: String,
-    required: true
-  },
-  password: {
     type: String,
     default: null
   },
@@ -20,15 +29,19 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: null
   },
-  lastLoginAt: {
-    type: Date,
-    default: null
-  },
-  resetPasswordToken: {
+  webURL: {
     type: String,
     default: null
   },
-  resetPasswordExpires: {
+  twitter: {
+    type: String,
+    default: null
+  },
+  telegram: {
+    type: String,
+    default: null
+  },
+  lastLoginAt: {
     type: Date,
     default: null
   },

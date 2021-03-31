@@ -1,6 +1,4 @@
 
-import bcrypt from 'bcrypt';
-
 import User from '~/database/models/user';
 import commonConstants from '~/constants/common';
 import messageConstants from '~/constants/message';
@@ -20,8 +18,8 @@ exports.getUsers = async (req, res) => {
 
 exports.getUser = async (req, res) => {
   try {
-    const { _id } = req.params;
-    const user = await User.findById(_id);
+    const { accountRS } = req.params;
+    const user = await User.findOne({ accountRS });
     return res.status(200).send(user);
   } catch (error) {
     console.log('[routes UserAPI getUser] error => ', error);
@@ -36,26 +34,12 @@ exports.addUser = async (req, res) => {
     let user = req.body;
     let currentUser = {};
 
-    if (req.user.type !== commonConstants.PROFILE_TYPES.ADMIN.VALUE) {
-      return res.status(401).json({
-        message: messageConstants.PERMISSION_MANAGE_USER_ERROR
-      });
-    }
-
-    if (!!user.email) {
-      currentUser = await User.findOne({ email: { $regex: new RegExp('^' + user.email.toLowerCase() + '$', 'i') } });
+    if (!!user.accountRS) {
+      currentUser = await User.findOne({ accountRS });
       if (!utility.isEmpty(currentUser)) {
         return res.status(500).json({
           message: messageConstants.USER_DUPLICATE_EMAIL_ERROR
         });
-      }
-    }
-
-    if (!!user.password) {
-      const hashedPassword = bcrypt.hashSync(user.password, commonConstants.BCRYPT_LENGTH);
-      user = {
-        ...user,
-        password: hashedPassword
       }
     }
 
@@ -74,26 +58,12 @@ exports.editUser = async (req, res) => {
     let user = req.body;
     let currentUser = {};
 
-    if (req.user.id !== user._id && req.user.type !== commonConstants.PROFILE_TYPES.ADMIN.VALUE) {
-      return res.status(401).json({
-        message: messageConstants.PERMISSION_MANAGE_USER_ERROR
-      });
-    }
-
-    if (!!user.email) {
-      currentUser = await User.findOne({ email: { $regex: new RegExp('^' + user.email.toLowerCase() + '$', 'i') } });
+    if (!!user.accountRS) {
+      currentUser = await User.findOne({ accountRS });
       if (!utility.isEmpty(currentUser) && user._id !== currentUser._id.toString()) {
         return res.status(500).json({
           message: messageConstants.USER_DUPLICATE_EMAIL_ERROR
         });
-      }
-    }
-
-    if (!!user.password) {
-      const hashedPassword = bcrypt.hashSync(user.password, commonConstants.BCRYPT_LENGTH);
-      user = {
-        ...user,
-        password: hashedPassword
       }
     }
 
