@@ -4,7 +4,7 @@ import CLOUD_SERVICE from '~/services/cloudinary';
 exports.uploadFileCloudinary = async (req, res) => {
   try {
     const { fileBuffer } = req.body;
-    const uploadResult = await CLOUD_SERVICE.cloudinaryUpload(fileBuffer);
+    const uploadResult = await CLOUD_SERVICE.cloudinaryImageUpload(fileBuffer);
 
     return res.status(200).json({
       success: true,

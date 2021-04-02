@@ -51,4 +51,5 @@ mongoose.connect(process.env.MONGO_URI,
   })
 
 app.listen(process.env.SERVER_PORT);
+app.timeout = 600000;
 console.log(`🚀 Server listening on port ` + process.env.SERVER_PORT);

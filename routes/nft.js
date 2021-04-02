@@ -2,6 +2,7 @@
 import NFT from '~/database/models/nft';
 import User from '~/database/models/user';
 import CLOUD_SERVICE from '~/services/cloudinary';
+import * as commonConstants from '~/constants/common';
 import messageConstants from '~/constants/message';
 import { isEmpty } from '~/utils/utility';
 
@@ -11,10 +12,16 @@ exports.addNFT = async (req, res) => {
       account,
       accountRS,
       tags,
+      type,
       fileBuffer
     } = req.body;
 
-    const uploadResult = await CLOUD_SERVICE.cloudinaryUpload(fileBuffer);
+    let uploadResult;
+    if (type === commonConstants.FILE_TYPES.VIDEO) {
+      uploadResult = await CLOUD_SERVICE.cloudinaryVideoUpload(fileBuffer);
+    } else {
+      uploadResult = await CLOUD_SERVICE.cloudinaryImageUpload(fileBuffer);
+    }
 
     let user = await User.findOne({ accountRS });
     if (isEmpty(user)) {
