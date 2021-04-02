@@ -9,4 +9,8 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
-exports.cloudinaryUpload = file => cloudinary.uploader.upload(file);
+exports.cloudinaryImageUpload = file => cloudinary.uploader.upload(file);
+exports.cloudinaryVideoUpload = file => cloudinary.uploader.upload(file, {
+  resource_type: "video",
+  chunk_size: 6000000,
+});
