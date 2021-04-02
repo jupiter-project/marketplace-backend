@@ -12,6 +12,7 @@ const message = {
   USER_VERIFIED_ERROR: 'Your account is not verified. Please contact to Administrator',
   USER_DUPLICATE_EMAIL_ERROR: 'This Email is already existed',
   PERMISSION_MANAGE_USER_ERROR: 'You are not allowed to manage this user',
+  CREATE_NFT_SUCCESS: 'NFT is created.'
 };
 
 export default message;

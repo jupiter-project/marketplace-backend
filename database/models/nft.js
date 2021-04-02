@@ -9,10 +9,6 @@ const NFTSchema = new mongoose.Schema({
     ref: 'user',
     required: true
   },
-  asset: {
-    type: String,
-    required: true
-  },
   tags: [
     {
       type: String,
