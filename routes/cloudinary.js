@@ -1,10 +1,16 @@
 import messageConstants from '~/constants/message';
 import CLOUD_SERVICE from '~/services/cloudinary';
+import * as commonConstants from '~/constants/common';
 
 exports.uploadFileCloudinary = async (req, res) => {
   try {
-    const { fileBuffer } = req.body;
-    const uploadResult = await CLOUD_SERVICE.cloudinaryImageUpload(fileBuffer);
+    const { type, fileBuffer } = req.body;
+    let uploadResult;
+    if (type === commonConstants.FILE_TYPES.VIDEO) {
+      uploadResult = await CLOUD_SERVICE.cloudinaryVideoUpload(fileBuffer);
+    } else {
+      uploadResult = await CLOUD_SERVICE.cloudinaryImageUpload(fileBuffer);
+    }
 
     return res.status(200).json({
       success: true,
